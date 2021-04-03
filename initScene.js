@@ -1,20 +1,21 @@
-/* global AFRAME, R, DOT_SIZE, DOT_COLOR, WELL, STATE_COLOR, WELL */
+/* global AFRAME */
 
 AFRAME.registerComponent('init-scene', {
 
-  init: function() {
+  init: function () {
     this.createDots(N);
   },
 
-  createDots: function(n) {
+  createDots: function (n) {
     let board = document.querySelector('#board');
-    for (let idx=0; idx<n; idx++) {
-      let circle = document.createElement('a-circle');
-      circle.setAttribute('dot-movement', '');
-      circle.setAttribute('dot-infection', '');
-      circle.setAttribute('class', 'dot');
-      circle.setAttribute('vector', idx === 0 ? 'true' : 'false');
-      board.appendChild(circle);
-    };
+    for (let idx = 0; idx < n; idx++) {
+      let sphere = document.createElement('a-sphere');
+      sphere.setAttribute('index', idx+'');
+      sphere.setAttribute('dot-movement', '');
+      sphere.setAttribute('dot-health', 'isPatientZero: '+(idx === 0 ? 'true' : 'false'));
+      sphere.setAttribute('class', 'dot');
+      sphere.setAttribute('radius', DOT_SIZE);
+      board.appendChild(sphere);
+    }
   }
-});
+})

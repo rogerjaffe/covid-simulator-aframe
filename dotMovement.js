@@ -8,13 +8,13 @@ AFRAME.registerComponent('dot-movement', {
 
   init: function() {
     this.data.direction = Math.random() * TWO_PI;
+    let pos = this.el.getAttribute('position');
     let position = {
       x: Math.random() * GRID_SIZE - (GRID_SIZE/2),
       y: Math.random() * GRID_SIZE - (GRID_SIZE/2),
-      z: 0
+      z: pos.z
     };
     this.el.setAttribute('position', position);
-    this.el.setAttribute('radius', DOT_SIZE);
   },
 
   checkBounce: function(position) {
@@ -29,6 +29,8 @@ AFRAME.registerComponent('dot-movement', {
   },
 
   tick: function(time, delta) {
+    const state = this.el.components['dot-health'].data.state;
+    if (state === 'DEAD') return;
     let step = DOT_SPEED * delta / 1000;
     let position = this.el.getAttribute('position');
     position.x = position.x + Math.cos(this.data.direction) * step;
@@ -39,14 +41,6 @@ AFRAME.registerComponent('dot-movement', {
 
   wallBounce: function(low, high) {
     return Math.random() * (high - low) + low;
-  },
-
-  createDots: function(n) {
-    let board = document.querySelector('#board');
-    for (let i=0; i<n; i++) {
-      let circle = document.createElement('a-circle');
-      circle.setAttribute('init-dot', "");
-      board.appendChild(circle);
-    }
   }
+
 });

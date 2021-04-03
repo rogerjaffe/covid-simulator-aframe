@@ -6,24 +6,39 @@ const DOT_SPEED = 0.5;
 const BORDER = 5;
 
 const PARMS = {
-  CONTAGIOUS_LOW: 2,
-  CONTAGIOUS_HIGH: 14,
-  RECOVERED_LOW: 5,
-  RECOVERED_HIGH: 15,
-  DEAD: 2                   // percent
+  VACCINATED_PERCENT: 25,                  // Percent of the population with immunity (prior infection, vaccine)
+
+  VACCINATED: {
+    NOT_CONTAGIOUS_PERCENT: 25,
+    NOT_SYMPTOMATIC_PERCENT: 70,
+    MORTALITY_PERCENT: 0,
+    CONTAGIOUS_START: {LOW: 2, HIGH: 4},
+    CONTAGIOUS_LENGTH: {LOW: 1, HIGH: 4},
+    SYMPTOMATIC_START: {LOW: 1, HIGH: 3},
+    SYMPTOMATIC_LENGTH: {LOW: 1, HIGH: 3},
+  },
+  NOT_VACCINATED: {
+    NOT_SYMPTOMATIC_PERCENT: 30,
+    MORTALITY_PERCENT: 2,
+    CONTAGIOUS_START: {LOW: 2, HIGH: 14},
+    CONTAGIOUS_LENGTH: {LOW: 5, HIGH: 20},
+    SYMPTOMATIC_START: {LOW: 5, HIGH: 10},
+    SYMPTOMATIC_LENGTH: {LOW: 5, HIGH: 15},
+  }
 }
 
-const WELL = 0;
-const INFECTED = 1;
-const CONTAGIOUS = 2;
-const RECOVERED = 4;
-const DEAD = 5;
+const COLORS = {
+  WELL: '#2DFEFE',
+  INFECTED: '#FFFD37',
+  CONTAGIOUS: '#FD9926',
+  SYMPTOMATIC: '#FC0D1B',
+  RECOVERED: '#2AFC2E',
+  DEAD: '#000000'
+}
 
-const STATE_COLOR = {
-  [WELL]:         '#00FF00',
-  [INFECTED]:     '#FFFFFF',
-  [CONTAGIOUS]:   '#FFFFFF',
-  [RECOVERED]:    '#FFFFFF',
-};
-
-const RN = (low, high) => Math.random() * (high-low) + low;
+const WELL =        'WELL';
+const INFECTED =    'INFECTED';
+const CONTAGIOUS =  'CONTAGIOUS';
+const SYMPTOMATIC = 'SYMPTOMATIC';
+const RECOVERED =   'RECOVERED';
+const DEAD =        'DEAD';
